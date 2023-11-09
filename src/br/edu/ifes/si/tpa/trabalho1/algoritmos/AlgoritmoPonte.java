@@ -2,6 +2,9 @@ package br.edu.ifes.si.tpa.trabalho1.algoritmos;
 
 import br.edu.ifes.si.tpa.trabalho1.estruturas.In;
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Grafo;
+
+import java.io.File;
+
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Aresta;
 
 /******************************************************************************
@@ -62,7 +65,8 @@ public class AlgoritmoPonte {
      */
     public static void main(String[] args) {
         // instanciando o Grafo G via arquivo
-        In in = new In(args[0]);
+        File file = new File("_dados\\Grafo-Ponte.txt");
+        In in = new In(file);
         Grafo G = new Grafo(in);
         System.out.println(G);
         
