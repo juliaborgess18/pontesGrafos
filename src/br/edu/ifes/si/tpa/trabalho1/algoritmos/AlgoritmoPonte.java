@@ -1,9 +1,12 @@
 package br.edu.ifes.si.tpa.trabalho1.algoritmos;
 
 import br.edu.ifes.si.tpa.trabalho1.estruturas.In;
+import javafx.scene.paint.Color;
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Grafo;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Aresta;
 
@@ -22,8 +25,14 @@ public class AlgoritmoPonte {
     private int cont;        // contador
     private int[] pre;       // pre[v] = o número de pré-ordem de v
     private int[] low;       // low[v] = é o valor de um caminho interessante de valor mínimo.
+    private ArrayList<Aresta> listaArestas;
+
+    public ArrayList<Aresta> getListaArestas() {
+        return listaArestas;
+    }
 
     public AlgoritmoPonte(Grafo G) {
+        listaArestas = new ArrayList<Aresta>();
         low = new int[G.V()];
         pre = new int[G.V()];
         for (int v = 0; v < G.V(); v++)
@@ -49,6 +58,7 @@ public class AlgoritmoPonte {
                 dfs(G, v, w);
                 low[v] = Math.min(low[v], low[w]);
                 if (low[w] == pre[w]) {
+                    listaArestas.add(a);
                     System.out.println(v + "-" + w + " é uma ponte");
                     pontes++;
                 }
@@ -69,16 +79,6 @@ public class AlgoritmoPonte {
         In in = new In(file);
         Grafo G = new Grafo(in);
         System.out.println(G);
-        
-        /*
-        // instanciando o Grafo G via código
-        Grafo G = new Grafo(4);
-        G.addAresta(new Aresta(0, 1));
-        G.addAresta(new Aresta(0, 2));
-        G.addAresta(new Aresta(1, 3));
-        G.addAresta(new Aresta(2, 3));
-        System.out.println(G);
-        */
 
         AlgoritmoPonte ponte = new AlgoritmoPonte(G);
         System.out.println("Pontes = " + ponte.pontes());

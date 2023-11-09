@@ -1,87 +1,78 @@
 // // Classe responsável por startar a aplicação
 package br.edu.ifes.si.tpa.trabalho1;
 
-import java.io.IOException;
-import com.brunomnsilva.smartgraph.graph.Graph;
-import com.brunomnsilva.smartgraph.graph.GraphEdgeList;
-import com.brunomnsilva.smartgraph.graphview.SmartCircularSortedPlacementStrategy;
-import com.brunomnsilva.smartgraph.graphview.SmartGraphPanel;
-import com.brunomnsilva.smartgraph.graphview.SmartPlacementStrategy;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+
 
 public class Main extends Application {
 
-    private static Scene scene;
-    // public static Stage stage;
-    private static Parent root;
-
-    @Override
-    public void start(Stage ignored) throws Exception {
-        // root = FXMLLoader.load(getClass().getResource("FXMLTelaPrincipal.fxml"));
-        // scene = new Scene(root, 350, 500 );
-
-        // stage.setTitle("Pontes em Grafos");
-        // stage.setScene(scene);
-        // stage.setResizable(false);
-
-        // Main.stage = stage;
-        // stage.show();
-        // Create the graph
-
-        Graph<String, String> g = new GraphEdgeList<>();
-
-        g.insertVertex("A");
-        g.insertVertex("B");
-        g.insertVertex("C");
-        g.insertVertex("D");
-        g.insertVertex("E");
-        g.insertVertex("F");
-        g.insertVertex("G");
-
-        g.insertEdge("A", "B", "1");
-        g.insertEdge("A", "C", "2");
-        g.insertEdge("A", "D", "3");
-        g.insertEdge("A", "E", "4");
-        g.insertEdge("A", "F", "5");
-        g.insertEdge("A", "G", "6");
-
-        g.insertVertex("H");
-        g.insertVertex("I");
-        g.insertVertex("J");
-        g.insertVertex("K");
-        g.insertVertex("L");
-        g.insertVertex("M");
-        g.insertVertex("N");
-
-        g.insertEdge("H", "I", "7");
-        g.insertEdge("H", "J", "8");
-        g.insertEdge("H", "K", "9");
-        g.insertEdge("H", "L", "10");
-        g.insertEdge("H", "M", "11");
-        g.insertEdge("H", "N", "12");
-
-        g.insertEdge("A", "H", "0");
-
-        SmartPlacementStrategy strategy = new SmartCircularSortedPlacementStrategy();
-        SmartGraphPanel<String, String> graphView = new SmartGraphPanel<>(g, strategy);
-        Scene scene = new Scene(graphView, 350, 500);
-
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("JavaFXGraph Visualization");
-        stage.setScene(scene);
-        stage.show();
-
-        // IMPORTANT! - Called after scene is displayed, so we can initialize the graph
-        // visualization
-        graphView.init();
+    public static void main(String[] args) {
+        launch();
     }
 
-    public static void main(String[] args) throws IOException {
-        launch(args);
+    @Override
+    public void start(Stage palco) throws Exception {
+        //Vértice 1
+        Circle circle1 = new Circle();
+        circle1.setCenterX(100.0f);
+        circle1.setCenterY(100.0f);
+        circle1.setRadius(15.0f);
+        circle1.setStroke(Color.BLACK);
+        circle1.setFill(Color.WHITE);
+        Text text1 = new Text(circle1.getCenterX()-4, circle1.getCenterY()+4, "1");
+
+        //Vértice 2
+        Circle circle2 = new Circle(15);
+        circle2.setCenterX(200.0f);
+        circle2.setCenterY(100.0f);
+        circle2.setStroke(Color.BLACK);
+        circle2.setFill(Color.WHITE);
+        Text text2 = new Text(circle2.getCenterX()-4, circle2.getCenterY()+4, "2");
+        
+        //Vértice 3
+        Circle circle3 = new Circle(15);
+        circle3.setCenterX(150.0f);
+        circle3.setCenterY(50.0f);
+        circle3.setStroke(Color.BLACK);
+        circle3.setFill(Color.WHITE);
+        Text text3 = new Text(circle3.getCenterX()-4, circle3.getCenterY()+4, "3");
+
+        //Linha entre Vértice 1 e Vértice 2
+        Line line1 = new Line();
+        line1.setStartX(circle1.getCenterX());
+        line1.setStartY(circle1.getCenterY());
+        line1.setEndX(circle2.getCenterX());
+        line1.setEndY(circle2.getCenterY());
+        
+        //Linha entre Vértice 2 e Vértice 3
+        Line line2 = new Line();
+        line2.setStartX(circle2.getCenterX());
+        line2.setStartY(circle2.getCenterY());
+        line2.setEndX(circle3.getCenterX());
+        line2.setEndY(circle3.getCenterY());
+        
+        //Linha entre Vértice 3 e Vértice 1
+        Line line3 = new Line();
+        line3.setStartX(circle3.getCenterX());
+        line3.setStartY(circle3.getCenterY());
+        line3.setEndX(circle1.getCenterX());
+        line3.setEndY(circle1.getCenterY());
+        line3.setStrokeWidth(5);
+        line3.setStroke(Color.RED);
+        
+        Group componentes = new Group();
+        componentes.getChildren().addAll(line1, line2, line3, circle1, circle2, circle3, text1, text2, text3);
+
+        Scene cena = new Scene(componentes, 550, 550);
+        palco.setTitle("IFES - SI - TPA - Trabalho 01: Algoritmos em Grafos");
+        palco.setScene(cena);
+        palco.show();
     }
 }
