@@ -1,0 +1,9 @@
+{
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.project.referencedLibraries": [
+        "/lib/*.jar",
+        "smartgraph-1.0.0-javadoc.jar",
+        "lib/smartgraph-1.0.0-javadoc.jar",
+        "lib/smartgraph-1.0.0.jar"
+    ]
+}
