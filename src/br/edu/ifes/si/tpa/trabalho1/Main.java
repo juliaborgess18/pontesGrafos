@@ -5,9 +5,10 @@ import br.edu.ifes.si.tpa.trabalho1.estruturas.In;
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Vertice;
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Aresta;
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Grafo;
-
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,9 +31,17 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         // String arquivo = args[0].substring(9);
-        File arquivo = new File("_dados\\Grafo-Ponte.txt");
-        In in = new In(arquivo);
-        // G = new Grafo(in);
+        File file = new File("_dados\\Grafo-Ponte.txt");
+        In in = new In(file);
+        G = new Grafo(in);
+        System.out.println("Grafo criado");
+        //System.out.println(G);
+        
+        // AlgoritmoPonte ponte = new AlgoritmoPonte(G);
+        // for (Aresta a : ponte.getListaPontes()) {
+        //     System.out.println(a.getV1() + "-" + a.getV2());
+        // }
+        // System.out.println("Pontes = " + ponte.pontes());
 
         launch();
     }
@@ -41,15 +50,15 @@ public class Main extends Application {
     public void start(Stage palco) throws Exception {
 
         //Adicionando a ação ao button
-        // button.setOnAction(new EventHandler<ActionEvent>() {
-        //     @Override
-        //     public void handle(ActionEvent event) {
-        //         ap = new AlgoritmoPonte(G);
-        //         desenharAP(ap);
-        //     }
-        // });
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ap = new AlgoritmoPonte(G);
+                desenharAP(ap);
+            }
+        });
 
-        // componentes.getChildren().add(button); //Adicionando o button a tela principal
+        componentes.getChildren().add(button); //Adicionando o button a tela principal
 
         //desenharGrafo(G);
 
@@ -59,54 +68,49 @@ public class Main extends Application {
         palco.show();
     }
 
-    public void desenharGrafo(Grafo G) {
-        List<Vertice> vertices = G.vertices();
+    // public void desenharGrafo(Grafo G) {
+    //     List<Vertice> vertices = G.vertices();
 
-        //Desenhando as arestas
-        for (Aresta a : G.arestas()) {
-            Line line = new Line();
-            line.setStartX(vertices.get(a.getV1()).getX());
-            line.setStartY(vertices.get(a.getV1()).getY());
-            line.setEndX(vertices.get(a.getV2()).getX());
-            line.setEndY(vertices.get(a.getV2()).getY());
-            line.setStroke(Color.BLACK);
-            componentes.getChildren().add(line);
-        }
+    //     //Desenhando as arestas
+    //     for (Aresta a : G.arestas()) {
+    //         Line line = new Line();
+    //         line.setStartX(vertices.get(a.getV1()).getX());
+    //         line.setStartY(vertices.get(a.getV1()).getY());
+    //         line.setEndX(vertices.get(a.getV2()).getX());
+    //         line.setEndY(vertices.get(a.getV2()).getY());
+    //         line.setStroke(Color.BLACK);
+    //         componentes.getChildren().add(line);
+    //     }
 
-        //Desenhando os vértices
-        for (int v = 0; v < G.V(); v++) {
-            Circle circle = new Circle();
-            circle.setCenterX(vertices.get(v).getX());
-            circle.setCenterY(vertices.get(v).getY());
-            circle.setRadius(15.0f);
-            circle.setStroke(Color.BLACK);
-            circle.setFill(Color.WHITE);
-            Text text = new Text(circle.getCenterX() - 4, circle.getCenterY() + 4, String.valueOf(v));
-            componentes.getChildren().add(circle);
-            componentes.getChildren().add(text);
-        }
-    }
+    //     //Desenhando os vértices
+    //     for (int v = 0; v < G.V(); v++) {
+    //         Circle circle = new Circle();
+    //         circle.setCenterX(vertices.get(v).getX());
+    //         circle.setCenterY(vertices.get(v).getY());
+    //         circle.setRadius(15.0f);
+    //         circle.setStroke(Color.BLACK);
+    //         circle.setFill(Color.WHITE);
+    //         Text text = new Text(circle.getCenterX() - 4, circle.getCenterY() + 4, String.valueOf(v));
+    //         componentes.getChildren().add(circle);
+    //         componentes.getChildren().add(text);
+    //     }
+    // }
 
     public void desenharAP(AlgoritmoPonte ap) {
-        List<Vertice> vertices = G.vertices();
-
-        // Desenhando a árvore geradora mínima - MST
-        for (Aresta a : ap.getListaPontes()) {
-            Line line = new Line();
-            line.setStartX(vertices.get(a.getV1()).getX());
-            line.setStartY(vertices.get(a.getV1()).getY());
-            line.setEndX(vertices.get(a.getV2()).getX());
-            line.setEndY(vertices.get(a.getV2()).getY());
-            line.setStroke(Color.RED);
-            line.setStrokeWidth(5);
-            componentes.getChildren().add(line);
-        }
+        //List<Vertice> vertices = G.vertices();
+        // Iniciando Desenho do grafo
+        final int WIDTH_SCREEN_SIZE = 500;
+        final int HEIGHT_SCREEN_SIZE = 450;
+        List<Double> lista_x = new ArrayList<>();
+        List<Double> lista_y = new ArrayList<>();
 
         // Desenhando os vértices
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 1; v < G.V(); v++) {
             Circle circle = new Circle();
-            circle.setCenterX(vertices.get(v).getX());
-            circle.setCenterY(vertices.get(v).getY());
+            Double x = new Random().nextDouble() * WIDTH_SCREEN_SIZE;
+            Double y = new Random().nextDouble() * WIDTH_SCREEN_SIZE;
+            circle.setCenterX(x);
+            circle.setCenterY(y);
             circle.setRadius(15.0f);
             circle.setStroke(Color.BLACK);
             circle.setFill(Color.WHITE);
@@ -114,6 +118,30 @@ public class Main extends Application {
             componentes.getChildren().add(circle);
             componentes.getChildren().add(text);
         }
+
+        // for (int i = 0; i < G.V(); i++) {
+        //     Line line = new Line();
+        //     line.setStartX(lista_x.get(i));
+        //     line.setStartY(lista_x.get(y));
+        //     line.setEndX();
+        //     line.setEndY();
+        //     line.setStroke(Color.RED);
+        //     line.setStrokeWidth(5);
+        //     componentes.getChildren().add(line);
+        // }
+   
+
+        // Desenhando a árvore geradora mínima - MST
+        // for (Aresta a : ap.getListaPontes()) {
+        //     Line line = new Line();
+        //     line.setStartX();
+        //     line.setStartY();
+        //     line.setEndX();
+        //     line.setEndY();
+        //     line.setStroke(Color.RED);
+        //     line.setStrokeWidth(5);
+        //     componentes.getChildren().add(line);
+        // }
     }
 }
 

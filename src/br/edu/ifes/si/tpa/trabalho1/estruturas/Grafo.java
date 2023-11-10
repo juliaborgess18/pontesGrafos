@@ -1,5 +1,7 @@
 package br.edu.ifes.si.tpa.trabalho1.estruturas;
 
+import java.io.File;
+
 /*******************************************************************************
  *  Compilação:        javac Grafo.java
  *  Execução:          java Grafo dados.txt
@@ -44,7 +46,7 @@ public class Grafo {
     private final int V;         // número de vértices no grafo
     private int A;               // número de arestas no grafo
     private List<Aresta>[] adj;  // adj[v1] = lista de adjacência do vértice v1
-    private List<Vertice> vertices = new ArrayList<Vertice>() ;
+    //private List<Vertice> vertices = new ArrayList<Vertice>() ;
     /**
      * Inicializa um dígrafo com V vertices e 0 arestas.
      * @param  V o número de vértices
@@ -81,13 +83,14 @@ public class Grafo {
             int v2 = in.readInt();
             double peso = 0;
             addAresta(new Aresta(v1, v2, peso));
+            
         }
-        //Adicionando os vértices
-        for (int i = 0; i < V; i++) {
-            double x = in.readDouble();
-            double y = in.readDouble();
-            this.vertices.add(i, new Vertice(i, x, y));
-        }
+        // Adicionando os vértices
+        // for (int i = 0; i < V; i++) {
+        //     double x = in.readDouble();
+        //     double y = in.readDouble();
+        //     //this.vertices.add(i, new Vertice(i, x, y));
+        // }
     }
 
     public Grafo() {
@@ -110,9 +113,9 @@ public class Grafo {
         return A;
     }
 
-    public List<Vertice> vertices() {
-        return this.vertices;
-    }
+    // public List<Vertice> vertices() {
+    //     return this.vertices;
+    // }
 
     /**
      * Valida vértice do dígrafo.
@@ -266,15 +269,20 @@ public class Grafo {
         return s.toString();
     }
 
-
-
     /**
      * Testa a classe Grafo.
      */
     public static void main(String[] args) {
-        In in = new In(args[0]);
+        File arquivo = new File("_dados\\Grafo-Ponte.txt");
+        In in = new In(arquivo);
         Grafo G = new Grafo(in);
-        System.out.println(G);
+
+        for (int i = 0; i < G.V; i++) {
+            for (Aresta a : G.adj(i)) {
+                System.out.println();
+            }
+            
+        }
 
     }
 

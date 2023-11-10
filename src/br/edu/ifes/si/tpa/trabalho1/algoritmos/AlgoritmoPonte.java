@@ -59,7 +59,7 @@ public class AlgoritmoPonte {
                 dfs(G, v, w);
                 low[v] = Math.min(low[v], low[w]);
                 if (low[w] == pre[w]) {
-                    System.out.println(v + "-" + w + " é uma ponte");
+                    //System.out.println(v + "-" + w + " é uma ponte");
                     listaPontes.add(a);
                     pontes++;
                 }
@@ -76,8 +76,6 @@ public class AlgoritmoPonte {
      * Testa a classe AlgoritmoPonte.
      */
 
-    
-
     public static void main(String[] args) {
         // instanciando o Grafo G via arquivo
         File file = new File("_dados\\Grafo-Ponte.txt");
@@ -87,13 +85,11 @@ public class AlgoritmoPonte {
         
         AlgoritmoPonte ponte = new AlgoritmoPonte(G);
         for (Aresta a : ponte.getListaPontes()) {
-            
+            System.out.println(a.getV1() + "-" + a.getV2());
         }
         System.out.println("Pontes = " + ponte.pontes());
 
-        
     }
-
 
 }
 
