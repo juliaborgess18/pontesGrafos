@@ -25,14 +25,15 @@ public class AlgoritmoPonte {
     private int cont;        // contador
     private int[] pre;       // pre[v] = o número de pré-ordem de v
     private int[] low;       // low[v] = é o valor de um caminho interessante de valor mínimo.
-    private ArrayList<Aresta> listaArestas;
+    private ArrayList<Aresta> listaPontes;
 
-    public ArrayList<Aresta> getListaArestas() {
-        return listaArestas;
+
+    public ArrayList<Aresta> getListaPontes() {
+        return listaPontes;
     }
 
     public AlgoritmoPonte(Grafo G) {
-        listaArestas = new ArrayList<Aresta>();
+        listaPontes = new ArrayList<Aresta>();
         low = new int[G.V()];
         pre = new int[G.V()];
         for (int v = 0; v < G.V(); v++)
@@ -42,7 +43,7 @@ public class AlgoritmoPonte {
         
         for (int v = 0; v < G.V(); v++)
             if (pre[v] == -1)
-                dfs(G, v, v);
+            dfs(G, v, v);
     }
 
     public int componentes() { return pontes + 1; }
@@ -58,8 +59,8 @@ public class AlgoritmoPonte {
                 dfs(G, v, w);
                 low[v] = Math.min(low[v], low[w]);
                 if (low[w] == pre[w]) {
-                    listaArestas.add(a);
                     System.out.println(v + "-" + w + " é uma ponte");
+                    listaPontes.add(a);
                     pontes++;
                 }
             }
@@ -70,18 +71,27 @@ public class AlgoritmoPonte {
         }
     }
 
+
     /**
      * Testa a classe AlgoritmoPonte.
      */
+
+    
+
     public static void main(String[] args) {
         // instanciando o Grafo G via arquivo
         File file = new File("_dados\\Grafo-Ponte.txt");
         In in = new In(file);
         Grafo G = new Grafo(in);
         System.out.println(G);
-
+        
         AlgoritmoPonte ponte = new AlgoritmoPonte(G);
+        for (Aresta a : ponte.getListaPontes()) {
+            
+        }
         System.out.println("Pontes = " + ponte.pontes());
+
+        
     }
 
 
