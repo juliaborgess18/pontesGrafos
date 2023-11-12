@@ -6,7 +6,6 @@ import br.edu.ifes.si.tpa.trabalho1.estruturas.Vertice;
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Aresta;
 import br.edu.ifes.si.tpa.trabalho1.estruturas.Grafo;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -33,8 +32,7 @@ public class Main extends Application {
         File file = new File("_dados\\Grafo-Ponte.txt");
         In in = new In(file);
         G = new Grafo(in);
-        System.out.println("Grafo criado");
-        //System.out.println(G);
+        System.out.println("Objeto 'Grafo' criado");
 
         launch();
     }
@@ -51,7 +49,7 @@ public class Main extends Application {
             }
         });
 
-        componentes.getChildren().add(button); //Adicionando o button a tela principal
+        componentes.getChildren().add(button);
 
         desenharGrafo(G);
 
@@ -63,11 +61,11 @@ public class Main extends Application {
 
     public void desenharGrafo(Grafo G) {
         List<Vertice> vertices = G.getVertices();
-        System.out.println("Iniciado desenho do Grafo");
         
-        //Desenhando as arestas
+        System.out.println("--- Iniciado desenho do Grafo ---");
+        
+        System.out.println("info: Iniciando desenho das arestas");
         try {
-
             for (Aresta a : G.arestas()) {
                 Line line = new Line();
                 line.setStartX(vertices.get(a.getV1()).getX());
@@ -77,12 +75,56 @@ public class Main extends Application {
                 line.setStroke(Color.BLACK);
                 componentes.getChildren().add(line);
             }
+            System.out.println("info: Finalizado o desenho das arestas");
         } catch (Exception e) {
-            System.out.println("Erro ao desenhar arestas");
+            System.out.println("erro: Erro ao desenhar arestas");
             e.printStackTrace();
         }
 
-        //Desenhando os vértices
+        System.out.println("info: Iniciando desenho dos vértices");
+        try {
+            for (int v = 0; v < G.V(); v++) {
+                Circle circle = new Circle();
+                circle.setCenterX(vertices.get(v).getX());
+                circle.setCenterY(vertices.get(v).getY());
+                circle.setRadius(15.0f);
+                circle.setStroke(Color.BLACK);
+                circle.setFill(Color.WHITE);
+                Text text = new Text(circle.getCenterX() - 4, circle.getCenterY() + 4, String.valueOf(v));
+                componentes.getChildren().add(circle);
+                componentes.getChildren().add(text);
+            }
+            System.out.println("info: Finalizado o desenho dos vértices");
+        } catch (Exception e) {
+            System.out.println("erro: Erro ao desenhar vérticies");
+            e.printStackTrace();
+        }
+
+        System.out.println("--- Finalizado o desenho do Grafo ---");
+    }
+
+    public void desenharAP(AlgoritmoPonte ap) {
+        List<Vertice> vertices = G.getVertices();
+
+        System.out.println("info: Iniciando desenho das pontes");
+        try {
+            for (Aresta a : ap.getListaPontes()) {
+                Line line = new Line();
+                line.setStartX(vertices.get(a.getV1()).getX());
+                line.setStartY(vertices.get(a.getV1()).getY());
+                line.setEndX(vertices.get(a.getV2()).getX());
+                line.setEndY(vertices.get(a.getV2()).getY());
+                line.setStroke(Color.RED);
+                line.setStrokeWidth(5);
+                line.toBack();
+                componentes.getChildren().add(line);
+            }
+            System.out.println("info: Finalizado o desenho das pontes");
+        } catch (Exception e) {
+            System.out.println("erro: Erro ao desenhar ponte");
+            e.printStackTrace();
+        }
+        System.out.println("info: Redesenhando os vértices");
         try {
 
             for (int v = 0; v < G.V(); v++) {
@@ -96,33 +138,13 @@ public class Main extends Application {
                 componentes.getChildren().add(circle);
                 componentes.getChildren().add(text);
             }
+            System.out.println("info: Finalizado o redesenho dos vértices");
         } catch (Exception e) {
-            System.out.println("Erro ao desenhar vérticies");
+            System.out.println("erro: Erro ao desenhar vérticies");
             e.printStackTrace();
         }
+        
     }
-
-    public void desenharAP(AlgoritmoPonte ap) {
-        List<Vertice> vertices = G.getVertices();
-
-        System.out.println("Iniciando desenho da ponte");
-        try {
-            for (Aresta a : ap.getListaPontes()) {
-                Line line = new Line();
-                line.setStartX(vertices.get(a.getV1()).getX());
-                line.setStartY(vertices.get(a.getV1()).getY());
-                line.setEndX(vertices.get(a.getV2()).getX());
-                line.setEndY(vertices.get(a.getV2()).getY());
-                line.setStroke(Color.RED);
-                line.setStrokeWidth(5);
-                componentes.getChildren().add(line);
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao desenhar ponte");
-            e.printStackTrace();
-        }
-    }
-
 
 }
 

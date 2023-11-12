@@ -1,7 +1,5 @@
 package br.edu.ifes.si.tpa.trabalho1.estruturas;
 
-import java.io.File;
-
 /*******************************************************************************
  *  Compilação:        javac Grafo.java
  *  Execução:          java Grafo dados.txt
@@ -32,7 +30,6 @@ import java.io.File;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Esta classe implementa a representação do grafo com lista de adjacências.
@@ -344,18 +341,18 @@ public class Grafo {
     /**
      * Testa a classe Grafo.
      */
-    // public static void main(String[] args) {
-    //     File arquivo = new File("_dados\\Grafo-Ponte.txt");
-    //     In in = new In(arquivo);
-    //     Grafo G = new Grafo(in);
+    public static void main(String[] args) {
+        String arquivo = args[0].substring(9);
+        In in = new In(arquivo);
+        Grafo G = new Grafo(in);
 
-    //     for (int i = 0; i < G.V; i++) {
-    //         for (Aresta a : G.adj(i)) {
-    //             System.out.println();
-    //         }
+        for (int i = 0; i < G.V; i++) {
+            for (Aresta a : G.adj(i)) {
+                System.out.println(a);
+            }
             
-    //     }
+        }
 
-    // }
+    }
 
 }
