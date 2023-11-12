@@ -32,6 +32,7 @@ import java.io.File;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Esta classe implementa a representação do grafo com lista de adjacências.
@@ -46,7 +47,12 @@ public class Grafo {
     private final int V;         // número de vértices no grafo
     private int A;               // número de arestas no grafo
     private List<Aresta>[] adj;  // adj[v1] = lista de adjacência do vértice v1
-    //private List<Vertice> vertices = new ArrayList<Vertice>() ;
+    private List<Vertice> vertices;
+    
+    public List<Vertice> getVertices() {
+        return vertices;
+    }
+
     /**
      * Inicializa um dígrafo com V vertices e 0 arestas.
      * @param  V o número de vértices
@@ -59,6 +65,7 @@ public class Grafo {
         this.V = V;
         this.A = 0;
         adj = new ArrayList[V];
+        vertices = new ArrayList<Vertice>();
         for (int v = 0; v < V; v++) {
             adj[v] = new ArrayList<>();
         }
@@ -74,23 +81,45 @@ public class Grafo {
      */
     public Grafo(In in) {
         this(in.readInt());
-        int E = in.readInt();
-        if (E < 0) {
+        int A = in.readInt();
+        if (A < 0) {
             throw new IllegalArgumentException("Número de arestas deve ser não negativo");
         }
-        for (int i = 0; i < E; i++) {
-            int v1 = in.readInt();
-            int v2 = in.readInt();
-            double peso = 0;
-            addAresta(new Aresta(v1, v2, peso));
-            
+    
+        //final int WIDTH_SCREEN_SIZE = 500;
+        //final int HEIGHT_SCREEN_SIZE = 450;
+        
+        //Adicionando os vértices
+        try {
+            List<Double> coordenadasX = criarCoordenadasXGrafos();
+            List<Double> coordenadasY = criarCoordenadasYGrafos();
+            for (int i = 0; i < V; i++) {
+                // Double x = new Random().nextDouble() * WIDTH_SCREEN_SIZE;
+                // Double y = new Random().nextDouble() * HEIGHT_SCREEN_SIZE;
+                // double x = in.readDouble();
+                // double y = in.readDouble();
+                double x = coordenadasX.get(i);
+                double y = coordenadasY.get(i);
+                this.vertices.add(i, new Vertice(i, x, y));
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao adicionar os vértices.");
+            e.printStackTrace();
         }
-        // Adicionando os vértices
-        // for (int i = 0; i < V; i++) {
-        //     double x = in.readDouble();
-        //     double y = in.readDouble();
-        //     //this.vertices.add(i, new Vertice(i, x, y));
-        // }
+    
+        //Adicionando as arestas
+        try {
+            for (int i = 0; i < A; i++) {
+                int v1 = in.readInt();
+                int v2 = in.readInt();
+                double peso = 0;
+                //double peso = in.readDouble();
+                addAresta(new Aresta(v1, v2, peso));   
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao adicionar as arestas.");
+            e.printStackTrace();
+        }
     }
 
     public Grafo() {
@@ -269,21 +298,64 @@ public class Grafo {
         return s.toString();
     }
 
+    public List<Double> criarCoordenadasXGrafos(){
+        List<Double> resultado = new ArrayList<>();
+        resultado.add(60d); //0
+        resultado.add(120d); //1
+        resultado.add(180d); //2
+        resultado.add(240d); //3
+        resultado.add(60d); //4
+        resultado.add(120d); //5
+        resultado.add(180d); //6
+        resultado.add(240d); //7
+        resultado.add(60d); //8
+        resultado.add(120d); //9
+        resultado.add(180d); //10
+        resultado.add(240d); //11
+        resultado.add(60d); //12
+        resultado.add(120d); //13
+        resultado.add(180d); //14
+        resultado.add(240d); //15
+        return resultado;
+
+    }
+
+    public List<Double> criarCoordenadasYGrafos(){
+        List<Double> resultado = new ArrayList<>();
+        resultado.add(60d); //0
+        resultado.add(60d); //1
+        resultado.add(60d); //2
+        resultado.add(60d); //3
+        resultado.add(120d); //4
+        resultado.add(120d); //5
+        resultado.add(120d); //6
+        resultado.add(120d); //7
+        resultado.add(180d); //8
+        resultado.add(180d); //9
+        resultado.add(180d); //10
+        resultado.add(180d); //11
+        resultado.add(240d); //12
+        resultado.add(240d); //13
+        resultado.add(240d); //14
+        resultado.add(240d); //15
+        return resultado;
+    }
+
     /**
      * Testa a classe Grafo.
      */
-    public static void main(String[] args) {
-        File arquivo = new File("_dados\\Grafo-Ponte.txt");
-        In in = new In(arquivo);
-        Grafo G = new Grafo(in);
+    // public static void main(String[] args) {
+    //     File arquivo = new File("_dados\\Grafo-Ponte.txt");
+    //     In in = new In(arquivo);
+    //     Grafo G = new Grafo(in);
 
-        for (int i = 0; i < G.V; i++) {
-            for (Aresta a : G.adj(i)) {
-                System.out.println();
-            }
+    //     for (int i = 0; i < G.V; i++) {
+    //         for (Aresta a : G.adj(i)) {
+    //             System.out.println();
+    //         }
             
-        }
+    //     }
 
-    }
+    // }
 
 }
