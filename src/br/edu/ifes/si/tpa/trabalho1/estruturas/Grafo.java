@@ -86,17 +86,18 @@ public class Grafo {
         //final int WIDTH_SCREEN_SIZE = 500;
         //final int HEIGHT_SCREEN_SIZE = 450;
         
+        
         //Adicionando os vértices
         try {
-            List<Double> coordenadasX = criarCoordenadasXGrafos();
-            List<Double> coordenadasY = criarCoordenadasYGrafos();
+            //List<Double> coordenadasX = criarCoordenadasXGrafos();
+            //List<Double> coordenadasY = criarCoordenadasYGrafos();
             for (int i = 0; i < V; i++) {
                 // Double x = new Random().nextDouble() * WIDTH_SCREEN_SIZE;
                 // Double y = new Random().nextDouble() * HEIGHT_SCREEN_SIZE;
-                // double x = in.readDouble();
-                // double y = in.readDouble();
-                double x = coordenadasX.get(i);
-                double y = coordenadasY.get(i);
+                double x = in.readDouble();
+                double y = in.readDouble();
+                //double x = coordenadasX.get(i);
+                //double y = coordenadasY.get(i);
                 this.vertices.add(i, new Vertice(i, x, y));
             }
         } catch (Exception e) {
@@ -293,49 +294,6 @@ public class Grafo {
             s.append(NEWLINE);
         }
         return s.toString();
-    }
-
-    public List<Double> criarCoordenadasXGrafos(){
-        List<Double> resultado = new ArrayList<>();
-        resultado.add(60d); //0
-        resultado.add(120d); //1
-        resultado.add(180d); //2
-        resultado.add(240d); //3
-        resultado.add(60d); //4
-        resultado.add(120d); //5
-        resultado.add(180d); //6
-        resultado.add(240d); //7
-        resultado.add(60d); //8
-        resultado.add(120d); //9
-        resultado.add(180d); //10
-        resultado.add(240d); //11
-        resultado.add(60d); //12
-        resultado.add(120d); //13
-        resultado.add(180d); //14
-        resultado.add(240d); //15
-        return resultado;
-
-    }
-
-    public List<Double> criarCoordenadasYGrafos(){
-        List<Double> resultado = new ArrayList<>();
-        resultado.add(60d); //0
-        resultado.add(60d); //1
-        resultado.add(60d); //2
-        resultado.add(60d); //3
-        resultado.add(120d); //4
-        resultado.add(120d); //5
-        resultado.add(120d); //6
-        resultado.add(120d); //7
-        resultado.add(180d); //8
-        resultado.add(180d); //9
-        resultado.add(180d); //10
-        resultado.add(180d); //11
-        resultado.add(240d); //12
-        resultado.add(240d); //13
-        resultado.add(240d); //14
-        resultado.add(240d); //15
-        return resultado;
     }
 
     /**

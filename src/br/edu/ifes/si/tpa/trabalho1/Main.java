@@ -13,7 +13,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -29,7 +31,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         //String arquivo = args[0].substring(9);
         //File file = new File("_dados\\GrafoPonderado1.txt");
-        File file = new File("_dados\\Grafo-Ponte.txt");
+        File file = new File("_dados\\Grafo-Ponte_2.txt");
         In in = new In(file);
         G = new Grafo(in);
         System.out.println("Objeto 'Grafo' criado");
@@ -72,7 +74,7 @@ public class Main extends Application {
                 line.setStartY(vertices.get(a.getV1()).getY());
                 line.setEndX(vertices.get(a.getV2()).getX());
                 line.setEndY(vertices.get(a.getV2()).getY());
-                line.setStroke(Color.BLACK);
+                line.setStroke(Color.BLUE);
                 componentes.getChildren().add(line);
             }
             System.out.println("info: Finalizado o desenho das arestas");
@@ -83,14 +85,16 @@ public class Main extends Application {
 
         System.out.println("info: Iniciando desenho dos vértices");
         try {
+            Image image = new Image("file:src/br/edu/ifes/si/tpa/trabalho1/images/computer.png");
             for (int v = 0; v < G.V(); v++) {
                 Circle circle = new Circle();
                 circle.setCenterX(vertices.get(v).getX());
                 circle.setCenterY(vertices.get(v).getY());
-                circle.setRadius(15.0f);
-                circle.setStroke(Color.BLACK);
-                circle.setFill(Color.WHITE);
-                Text text = new Text(circle.getCenterX() - 4, circle.getCenterY() + 4, String.valueOf(v));
+                circle.setRadius(25.0f);
+                circle.setStroke(Color.TRANSPARENT);
+                circle.setFill(new ImagePattern(image));
+                Text text = new Text(circle.getCenterX() - 4, circle.getCenterY() + 31, String.valueOf(v));
+                text.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
                 componentes.getChildren().add(circle);
                 componentes.getChildren().add(text);
             }
@@ -126,15 +130,16 @@ public class Main extends Application {
         }
         System.out.println("info: Redesenhando os vértices");
         try {
-
+            Image image = new Image("file:src/br/edu/ifes/si/tpa/trabalho1/images/computer.png");
             for (int v = 0; v < G.V(); v++) {
                 Circle circle = new Circle();
                 circle.setCenterX(vertices.get(v).getX());
                 circle.setCenterY(vertices.get(v).getY());
-                circle.setRadius(15.0f);
-                circle.setStroke(Color.BLACK);
-                circle.setFill(Color.WHITE);
-                Text text = new Text(circle.getCenterX() - 4, circle.getCenterY() + 4, String.valueOf(v));
+                circle.setRadius(25.0f);
+                circle.setStroke(Color.TRANSPARENT);
+                circle.setFill(new ImagePattern(image));
+                Text text = new Text(circle.getCenterX() - 4, circle.getCenterY() + 31, String.valueOf(v));
+                text.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
                 componentes.getChildren().add(circle);
                 componentes.getChildren().add(text);
             }
