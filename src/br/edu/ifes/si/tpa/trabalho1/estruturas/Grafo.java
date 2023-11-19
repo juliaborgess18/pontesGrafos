@@ -305,12 +305,11 @@ public class Grafo {
         Grafo G = new Grafo(in);
 
         for (int i = 0; i < G.V; i++) {
+            System.out.println("Vertice: " + i);
             for (Aresta a : G.adj(i)) {
                 System.out.println(a);
             }
-            
         }
-
     }
 
 }

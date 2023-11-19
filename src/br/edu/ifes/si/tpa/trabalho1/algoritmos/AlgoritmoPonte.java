@@ -59,13 +59,10 @@ public class AlgoritmoPonte {
                 dfs(G, v, w);
                 low[v] = Math.min(low[v], low[w]);
                 if (low[w] == pre[w]) {
-                    //System.out.println(v + "-" + w + " é uma ponte");
                     listaPontes.add(a);
                     pontes++;
                 }
             }
-
-            // atualiza número low - ignora o reverso da aresta que leva a v
             else if (w != u)
                 low[v] = Math.min(low[v], pre[w]);
         }

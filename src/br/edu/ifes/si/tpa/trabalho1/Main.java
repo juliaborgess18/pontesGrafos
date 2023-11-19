@@ -60,7 +60,7 @@ public class Main extends Application {
             }
         });
 
-         // Adicionando a ação ao button de desenhar o segundo grafo
+        // Adicionando a ação ao button de desenhar o segundo grafo
         btnGrafo_2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -69,6 +69,12 @@ public class Main extends Application {
                 In in = new In(file);
                 G = new Grafo(in);
                 System.out.println("Objeto 'Grafo' criado");
+                for (int i = 0; i < G.V(); i++) {
+                    System.out.println("Vertice: " + i);
+                    for (Aresta a : G.adj(i)) {
+                        System.out.println(a);
+                    }
+                }
                 desenharGrafo(G);
             }
         });
