@@ -1,23 +1,20 @@
 
 # Pontes em Grafos
 
-Trabalho realizado na disciplina Técnicas de programação avançadas do curso ...
+Este projeto foi desenvolvido como parte da disciplina "Técnicas de Programação Avançadas" do curso de Sistemas de Informação no IFES Campus Cachoeiro.
 
-blá blá blá sobre o projeto
+## Sobre o Projeto
+O trabalho aborda o conceito de pontes em grafos, com ênfase na aplicação prática no cabeamento de redes. O programa, desenvolvido em Java 8 utilizando a biblioteca JavaFX, oferece uma representação visual interativa para ilustrar o conceito de pontes em grafos, proporcionando uma compreensão mais tangível desse tema.
 
-- Data de entrega: 21/11/2023
-- Linguagem de programação: java 8
-- Bibliotecas: javaFx
-- Tema: Pontes em grafos
-- Aplicação do mundo real: Cabeamento de rede
+## Data de Entrega
+21/11/2023
 
+## Tecnologias Utilizadas
+Linguagem de Programação: Java 8
+Bibliotecas: JavaFX
 
-## Instruções
-
-Ler o .txt
-```http
-  blá blá blá sobre as formas de ler arquivos .txt aqui.
-```
+## Aplicação no Mundo Real
+O tema escolhido, "Pontes em Grafos", tem uma aplicação direta no mundo real, especialmente no contexto de cabeamento de redes. Compreender os conceitos de pontes em grafos é essencial para otimizar a infraestrutura de redes, garantindo eficiência e confiabilidade.
 
 ## Autores
 
